@@ -5,11 +5,11 @@
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register test/**.*/test.ts",
-    "tspath": "node ./dist/src/tspath.js"
+    "tspath_ext": "node ./dist/src/tspath.js"
   },
   "preferGlobal": true,
   "bin": {
-    "tspath": "./dist/tspath.js"
+    "tspath_ext": "./dist/tspath.js"
   },
   "keywords": [
     "relative",
