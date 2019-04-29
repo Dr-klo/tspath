@@ -1,15 +1,11 @@
 {
   "name": "tspath_ext",
-  "version": "1.3.7",
+  "version": "1.3.9",
   "description": "TypeScript Path Igniter resolves @paths specified in tsconfig",
   "scripts": {
     "build": "tsc",
     "test": "mocha -r ts-node/register test/**.*/test.ts",
     "tspath_ext": "node ./dist/src/tspath.js"
-  },
-  "preferGlobal": true,
-  "bin": {
-    "tspath_ext": "./dist/tspath.js"
   },
   "keywords": [
     "relative",
