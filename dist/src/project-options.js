@@ -27,13 +27,19 @@ class ProjectOptions {
     //TODO: Support fallbacks
     processMappings(mappings) {
         for (var alias in mappings) {
-            this.pathMappings[alias] = mappings[alias][0]; // No support for fallbacks yet...
+            let relativePath = mappings[alias][0];
+            if (this.rootDirs && this.rootDirs.length > 1) {
+                // if typescript has multiply paths it compiles as many dirs
+                relativePath = relativePath.replace('../', '');
+            }
+            this.pathMappings[alias] = relativePath; // No support for fallbacks yet...
         }
     }
     constructor(tsconfigObj) {
         this.pathMappings = {};
         this.outDir = tsconfigObj.outDir;
         this.baseUrl = tsconfigObj.baseUrl;
+        this.rootDirs = tsconfigObj.rootDirs;
         this.processMappings(tsconfigObj.paths);
     }
 }
