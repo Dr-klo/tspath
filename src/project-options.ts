@@ -27,12 +27,18 @@ import { ISettings } from "./type-definitions";
 export class ProjectOptions {
 	public outDir: string;
 	public baseUrl: string;
+	public rootDirs: string[];
 	public pathMappings: ISettings;
 
 	//TODO: Support fallbacks
 	processMappings(mappings: any) {
 		for (var alias in mappings) {
-			this.pathMappings[alias] = mappings[alias][0]; // No support for fallbacks yet...
+            let relativePath = mappings[alias][0];
+            if (this.rootDirs && this.rootDirs.length > 1){
+                // add supporting fall back locations
+                relativePath = relativePath.replace('../','');
+            }
+            this.pathMappings[alias] = relativePath; // No support for fallbacks yet...
 		}
 	}
 
@@ -40,6 +46,7 @@ export class ProjectOptions {
 		this.pathMappings = {};
 		this.outDir = tsconfigObj.outDir;
 		this.baseUrl = tsconfigObj.baseUrl;
+		this.rootDirs = tsconfigObj.rootDirs;
 		this.processMappings(tsconfigObj.paths);
 	}
 }
