@@ -69,5 +69,63 @@ $ tspath
 ```
 Yes, that´s it, really!
 
-
 Say bye bye to the relative path hell!
+
+##### Supporting fall back locations
+Sometimes it need to link external module to compile into Your project. For example the most regular problem - usage interfaces both: backend and frontend. 
+```
+ |-- Project
+    |-- backend
+        |-- tsconfig.json
+        |-- package.json
+        |-- src
+            |-- index.ts
+    |-- common
+        |-- tsconfig.json
+        |-- package.json
+        |-- src
+            |-- IUser.ts
+    |-- frontend
+        |-- tsconfig.json
+        |-- angular.json
+        |-- package.json
+        |-- src
+            |-- main.ts
+```
+For use common module boths you should simply add configuration of typescript compilation in **tsconfig.json**.
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "outDir": "./out",
+    "sourceMap": true,
+    "baseUrl": ".",
+    "rootDirs": [
+        "./src",
+        "../common/src"
+    ],
+    "paths": {
+        "@common/*" : ["../common/src/*"]
+    }
+  }
+}
+```
+
+This configuration says compile all from `rootDirs` to `outDur`. 
+Because we use upscale structure - typescript compiler will make subtree for each upper project.
+```
+ |-- Project
+    |-- backend
+        ...
+        |-- out
+            |-- common
+                |-- src
+                    |-- IUser.js   
+            |-- backend
+                |-- src
+                    |-- index.js
+```
+This is becouse this fork aimed - correctly link upper project sturcture
+
+:warning: **Important!** This structure will be generated only if any reference will alive to common module. If not - it will be make regular flat structure and this will not work.
