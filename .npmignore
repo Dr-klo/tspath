@@ -2,3 +2,4 @@
 tsconfig.json
 index.ts
 .idea/
+node_modules/
