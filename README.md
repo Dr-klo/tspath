@@ -65,7 +65,9 @@ relative paths again, here is when **TSPath** comes into play.
 
 So, simply run:
 ```bash
-$ ./node_modules/tspath_ext/dist/tspath.js
+$ node node_modules/tspath_ext/dist/tspath.js
+or
+$ node node_modules/tspath_ext/dist/tspath.js -f
 ```
 Yes, that´s it, really!
 
