@@ -355,8 +355,7 @@ export class ParserEngine {
 			}
 			else {
 				let tmpExt = path.extname(file);
-
-				if ((fileExtension.length > 0 && scope.matchExtension(fileExtension))
+				if ((fileExtension.length > 0 && tmpExt ===fileExtension)
 					|| (fileExtension.length < 1)
 					|| (fileExtension == "*.*")) {
 					let fullFilename = path.join(dir, file);
